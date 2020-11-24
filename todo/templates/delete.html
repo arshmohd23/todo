@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <hr>
+
+
+    <h4>Are You Sure Want Delete??</h4><button id="but" type="submit" name='confirm'>Yes</button>
+    <button id="no"><a href="{% url 'home'%}">No</a></button>
+
+
+</form>
+{% endblock content %}

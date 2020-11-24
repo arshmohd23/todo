@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action=" " method="POST">
+    {% csrf_token %}
+
+    <div class="center">
+        {{form.text}}
+
+
+        <div class="autob">
+            <button type="submit" class="btn btn-success" style="width: 80px;">ADD</button>
+        </div>
+
+
+    </div>
+</form>
+<form action="delete_all" method="POST">
+    {% csrf_token %}
+    <div class="del">
+        <button type="submit" class="btn btn-danger" style="width: 400px;">CLEAR ALL</button>
+    </div>
+
+
+</form>
+
+<div id="cont">
+
+    <div id="todo">
+        <h2>TO DO</h2>
+    </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+
+
+
+        {% for i in text %}
+        <div style="display: flex;  background-color:cornsilk; margin-bottom:2px">
+            {% if i.complete == True %}
+            <p><s>{{i}}</s></p>
+            <span style="font-size: 10px;">{{i.created_at|date}}</span>
+            <div id="update">
+                <a href="{% url 'update' i.id %}">Update</a>
+            </div>
+            <div id="delete">
+                <a href="{% url 'delete' i.id %}">Delete</a>
+            </div>
+
+            {% else %}
+            <li style="font-weight:bold; font-family:inherit">{{i}}</li>
+            <span style="font-size: 10px;">&nbsp; {{i.created_at|date}}</span>
+            <div id=update>
+                <a href="{% url 'update' i.id %}">Update</a></div>
+            <div id="delete">
+                <a href="{% url 'delete' i.id %}">Delete</a></div>
+
+            {% endif %}
+
+        </div>
+
+
+        {% endfor %}
+
+
+
+
+    </form>
+
+
+
+
+</div>
+
+{% endblock content %}
